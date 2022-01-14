@@ -1,0 +1,23 @@
+{
+  "name": "commit-lint-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/someshsridhara/commit-lint-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/someshsridhara/commit-lint-demo/issues"
+  },
+  "homepage": "https://github.com/someshsridhara/commit-lint-demo#readme",
+  "dependencies": {
+    "@commitlint/cli": "^16.0.2",
+    "@commitlint/config-conventional": "^16.0.0"
+  }
+}
