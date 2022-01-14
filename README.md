@@ -1,1 +1,2 @@
 # commit-lint-demo
+test
