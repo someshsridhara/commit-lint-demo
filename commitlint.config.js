@@ -3,13 +3,12 @@ module.exports = {
     parserPreset: {
         parserOpts: {
             headerPattern: /^(\[[A-Z]+-\d+] )?(\w*)(?:\((.*)\))?!?: (.*)$/,
-            breakingHeaderPattern: /^\[[A-Z]+-\d+](\w*)(?:\((.*)\))?!: (.*)$/,
             headerCorrespondence: ['jira', 'type', 'scope', 'subject'],
         },
     },
     rules: {
         'contains-jira-id': [2, 'always'],
-        'scope-case': [2, 'always', ['lower-case', 'upper-case']],
+        'scope-case': [2, 'always', ['lower-case']],
     },
     plugins: [
         {
