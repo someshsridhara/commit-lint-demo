@@ -28,16 +28,28 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t test/trivy:1.0 .
+          docker build -t docker.io/somesha/trivy-demo:${{ github.sha }} .
 
-      - name: Install Trivy
-        run: |
-          sudo apt-get install wget apt-transport-https gnupg lsb-release
-          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
-          sudo apt-get update
-          sudo apt-get install trivy
+#      - name: Install Trivy
+#        run: |
+#          sudo apt-get install wget apt-transport-https gnupg lsb-release
+#          wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+#          echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+#          sudo apt-get update
+#          sudo apt-get install trivy
+#
+#      - name: Scan image with Trivy
+#        run: |
+#          trivy image test/trivy:1.0
 
-      - name: Scan image with Trivy
-        run: |
-          trivy image test/trivy:1.0
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/somesha/trivy-demo:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'trivy-results.sarif'
