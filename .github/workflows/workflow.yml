@@ -40,4 +40,4 @@ jobs:
 
       - name: Scan image with Trivy
         run: |
-          trivy image trivy/test:1.0
+          trivy image test/trivy:1.0
